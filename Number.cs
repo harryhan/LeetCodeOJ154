@@ -369,6 +369,73 @@ For the purpose of this problem, assume that your function returns 0 when the re
 
             return result;
         }
+
+
+        /*
+         * Determine whether an integer is a palindrome. Do this without extra space.
+         * Could negative integers be palindromes? (ie, -1)
+         * If you are thinking of converting the integer to string, note the restriction of using extra space.
+         * You could also try reversing an integer. 
+         * However, if you have solved the problem "Reverse Integer", you know that the reversed integer might overflow. How would you handle such case?
+         * There is a more generic way of solving this problem.
+         */
+        //Palindrome Number
+        public bool IsPalindrome(int x)
+        {
+            if (x<0)
+            {
+                return false;
+            }
+
+            int min = 1;//和x同样位数的整数最小值，例如x=1234，则min=1000
+            while (x/min>=10)
+            {
+                min *= 10;
+            }
+
+            //那就是先比较整数的第1位和最后1位是否相等，如果不等，则直接返回false；
+            //若相等，则接下去判断剩下的位置，如同回文字符串判断的过程一样。
+            while (x>0)
+            {
+                int f = x / min;
+                int l = x % 10;
+                if (f!=l)
+                {
+                    return false;
+                }
+                x = (x % min) / 10;
+                min /= 100;
+            }
+
+            return true;
+        }
+
+        public bool IsPalindrome2(int x)
+        {
+            if (x < 0)
+            {
+                return false;
+            }
+
+            bool result = false;
+
+            int temp = x;
+            long h = 0;
+
+            //如果h用int，则当x等于10位数且尾数比较大时，运算过程中会int溢出现象
+            while (temp > 0)
+            {
+                h = h * 10 + temp % 10;
+                temp = temp / 10;
+            }
+
+            if (h == x)
+            {
+                result = true;
+            }
+
+            return result;
+        }
     }
 
     public class ListNode

@@ -23,8 +23,9 @@ namespace LeetCodeOJ154
             //Console.WriteLine(int.MinValue);
             //Console.WriteLine(int.MaxValue);
             //Reverse();
+            //MyAtoi();
 
-            MyAtoi();
+            IsPalindrome();
 
             Console.ReadKey();
         }
@@ -273,6 +274,7 @@ namespace LeetCodeOJ154
             s.Add("-`123", 0);
             s.Add("-123", -123);
             s.Add("0", 0);
+            s.Add("-0", 0);
             
             
             
@@ -283,6 +285,30 @@ namespace LeetCodeOJ154
             {
                 var result = a.MyAtoi(item.Key);
                 Console.WriteLine("{0}:{1}##{2}", result == item.Value, item.Key, result);
+            }
+            timer.Stop();
+            Console.WriteLine("耗时{0}毫秒", timer.ElapsedMilliseconds);
+        }
+
+        private static void IsPalindrome()
+        {
+            var s = new Dictionary<int,bool>();
+            s.Add(-1,false);
+            s.Add(0,true);
+            s.Add(9,true);
+            s.Add(10,false);
+            s.Add(1234567890,false);
+            s.Add(int.MaxValue,false);
+            s.Add(1234567899,false);
+            s.Add(12321,true);
+            s.Add(1221,true);
+
+            var a = new LeetCodeOJ154.Solution();
+            timer.Restart();
+            foreach (var item in s)
+            {
+                var result = a.IsPalindrome(item.Key);
+                Console.WriteLine("{0}:{1}##{2}", result==item.Value, item.Key, result);
             }
             timer.Stop();
             Console.WriteLine("耗时{0}毫秒", timer.ElapsedMilliseconds);
